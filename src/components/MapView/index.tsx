@@ -1,6 +1,10 @@
 import "cesium/Build/Cesium/Widgets/widgets.css";
 
-export function MapView({ id }: { id: string }) {
+interface MapViewProps {
+  id: string;
+}
+
+export function MapView({ id }: MapViewProps) {
   return (
     <div className="flex-col">
       <ul className="flex flex-row gap-4"></ul>

@@ -1,14 +1,11 @@
 import { SessionProvider } from "next-auth/react";
 
-interface AppInterface {
+interface AppProps {
   Component: any;
   pageProps: any;
 }
 
-function MyApp({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppInterface) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
       <Component {...pageProps} />
