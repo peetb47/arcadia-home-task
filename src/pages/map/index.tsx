@@ -12,11 +12,17 @@ const initialLocation = "budapest";
 
 export default function Map() {
   const [location, setLocation] = useState<string>(initialLocation);
-  const { flyTo, ready } = useMap(id);
+  const { flyTo, placePin, ready } = useMap(id);
   const { coordinates } = useCoordinates();
 
+  const flyToAndPlacePin = (coordinate: Coordinate) => {
+    flyTo(coordinate);
+    placePin(coordinate);
+  };
+
   useEffect(() => {
-    coordinates && ready && flyTo(coordinates[initialLocation]);
+    // TODO: optimize the placement to not place again if already placed on a coordinate
+    coordinates && ready && flyToAndPlacePin(coordinates[initialLocation]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coordinates, ready]);
 
@@ -28,7 +34,7 @@ export default function Map() {
             location={location}
             coordinates={coordinates}
             onChange={(coordinate: Coordinate, location: string) => {
-              flyTo(coordinate);
+              flyToAndPlacePin(coordinate);
               setLocation(location);
             }}
           />
