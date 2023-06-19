@@ -8,9 +8,10 @@ Cesium.Ion.defaultAccessToken =
 const pinBuilder = new Cesium.PinBuilder();
 
 export function useMap(mapId: string) {
-  const viewer = useRef<Cesium.Viewer | null>(null);
   const [ready, setReady] = useState(false);
+  const viewer = useRef<Cesium.Viewer | null>(null);
 
+  // flies the camera to a given coordinate and height
   function flyTo(coordinate: Coordinate | undefined, height?: number) {
     if (!coordinate) {
       console.error("Coordinate is required to fly to");
@@ -18,19 +19,26 @@ export function useMap(mapId: string) {
     }
     const { lat, lng } = coordinate;
 
-    viewer.current?.entities?.add({
-      position: Cesium.Cartesian3.fromDegrees(+lng, +lat, 300),
-      billboard: {
-        image: pinBuilder.fromColor(Cesium.Color.AZURE, 64.0),
-        scale: 1.0,
-      },
-    });
-
     viewer.current?.camera?.flyTo({
       destination: Cesium.Cartesian3.fromDegrees(+lng, +lat, height || 300),
       orientation: {
         heading: Cesium.Math.toRadians(0.0),
         pitch: Cesium.Math.toRadians(-15.0),
+      },
+    });
+  }
+
+  function placePin(coordinate: Coordinate | undefined, height?: number) {
+    if (!coordinate) {
+      console.error("Coordinate is required to place the pin");
+      return;
+    }
+    const { lat, lng } = coordinate;
+    viewer.current?.entities?.add({
+      position: Cesium.Cartesian3.fromDegrees(+lng, +lat, 300),
+      billboard: {
+        image: pinBuilder.fromColor(Cesium.Color.AZURE, 64.0),
+        scale: 1.0,
       },
     });
   }
@@ -62,5 +70,5 @@ export function useMap(mapId: string) {
     };
   }, [mapId]);
 
-  return { flyTo, ready };
+  return { flyTo, placePin, ready };
 }
