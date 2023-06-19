@@ -14,6 +14,5 @@ export default function handler(
     los_angeles: { lat: "33.9201528", lng: "-118.3925842" },
   };
 
-  // Set a status code and send the coordinates as JSON
   res.status(200).json(coordinates);
 }

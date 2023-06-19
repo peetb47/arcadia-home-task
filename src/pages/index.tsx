@@ -1,5 +1,5 @@
-import { Layout } from "@/components/Layout";
 import { useSession } from "next-auth/react";
+import { Layout } from "@/components/Layout";
 import { SignInButton } from "@/components/SignInButton";
 import { Menu } from "@/components/Menu";
 
