@@ -1,6 +1,8 @@
+export type Coordinate = {
+  lat: string;
+  lng: string;
+};
+
 export interface Coordinates {
-  [key: string]: {
-    lat: string;
-    lng: string;
-  };
+  [key: string]: Coordinate;
 }
