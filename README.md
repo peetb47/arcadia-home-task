@@ -5,7 +5,7 @@ Prerequisites:
 npm install
 # init assets required by cesium
 # more info at: https://cesium.com/learn/cesiumjs-learn/cesiumjs-quickstart/#install-with-npm
-npm init
+npm run init-assets
 ```
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
